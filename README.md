@@ -16,8 +16,8 @@ Syntax :
 
 <options> ::= <tagName> : <subSentence> | <options>"\n"<options>
 
-<subSence> ::= "##"<space><tagName>"\n"
-             | "##"<space><name>"\n"<content>
+<subSence> ::= "## "<tagName>"\n"
+             | "## "<name>"\n"<content>
 
 <name> ::= <non-blank-string>
 
@@ -34,7 +34,7 @@ Syntax :
                      | <digits>
                      | <non-blank-string><non-blank-string>
 
-<blank>  ::= <space> | "\n" | "\t" | <blank><blank>
+<blank>  ::= " " | "\n" | "\t" | <blank><blank>
 
 <punctuations> ::= "~" | "!" | "$" | "%" | "^" | "&" | "*" | "(" | ")"
                  | "_" | "+" | "=" | "-" | "{" | "}" | "|" | "[" | "]" | "\"
