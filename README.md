@@ -10,14 +10,15 @@ Syntax :
 
 <scene> ::= "# "<name>"\n"
           | "# "<name>"\n"<content>
-          | <scene><subSence>
+          | <scene><subSences>
 
-<content> ::= <sentence> | <options> | <content>"\n"<content>
+<content> ::= <sentence> | <options> | <sentence><content>
 
-<options> ::= <tagName> : <subSentence> | <options>"\n"<options>
+<options> ::= <tagName> : <string> | <options>"\n"<options>
 
-<subSence> ::= "## "<tagName>"\n"
-             | "## "<name>"\n"<content>
+<subSences> ::= "## "<tagName>"\n"
+              | "## "<tagName>"\n"<content>
+              | <subSences><subSences>
 
 <name> ::= <non-blank-string>
 
@@ -34,7 +35,7 @@ Syntax :
                      | <digits>
                      | <non-blank-string><non-blank-string>
 
-<blank>  ::= " " | "\n" | "\t" | <blank><blank>
+<blank>  ::= " " | "\t" | <blank><blank>
 
 <punctuations> ::= "~" | "!" | "$" | "%" | "^" | "&" | "*" | "(" | ")"
                  | "_" | "+" | "=" | "-" | "{" | "}" | "|" | "[" | "]" | "\"
