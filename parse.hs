@@ -1,17 +1,22 @@
 
 import System.IO
 import Data.List
+import Text.Show.Unicode
 
 type Script   = [Scene]
 data Scene    =  Scene   {title :: String,
                           pref  :: Content,
-                          subs  :: [SubScene]} deriving (Show)
+                          subs  :: [SubScene]}
 
 data SubScene = SubScene {name  :: String, ctnt :: Content} deriving (Show)
 
 data Content  = Content  {sents :: [String], opts :: [Option]} deriving (Show)
 
 data Option   = Option   {tag   :: String, sent :: String} deriving (Show)
+
+instance Show Scene where
+  show (Scene tit prf sub) = ushow tit
+
 
 sceneMrk = "# "
 subscMrk = "## "
