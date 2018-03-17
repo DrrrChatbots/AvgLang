@@ -2,7 +2,7 @@
 
 Markdown liked language compiled to html embedded with js.
 
-Share your script by pasting the output to your Blog !
+Share your game by pasting the output to your Blog !
 
 Syntax :
 ```
@@ -14,7 +14,7 @@ Syntax :
 
 <content> ::= <sentence> | <options> | <sentence><content>
 
-<options> ::= <tagName> : <string> | <options>"\n"<options>
+<options> ::= <tagName> ":" <string> | <options>"\n"<options>
 
 <subSences> ::= "## "<tagName>"\n"
               | "## "<tagName>"\n"<content>
