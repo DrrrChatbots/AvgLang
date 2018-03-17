@@ -86,13 +86,8 @@ strip = f . f where f = reverse . dropWhile isSpace
 
 main = do
   --args <- getArgs
-  raw <- readFile "script.txt"
+  raw <- readFile "script.md"
   tml <- fmap lines $ readFile "tml.html"
   let script = parseScript raw
       replace = (\t -> if isInfixOf insMrk t then script else t) in
     writeFile "output.html" . unlines $ map replace tml
-  --parseScene raw
-  --let ctx = filter ((>0) . length) . map strip $ lines raw
-  --    script = map parseScene $ splitWith sceneMrk ctx
-  -- in writeFile "json.js" $
-  --   "<script>\nvar scs = " ++ show script ++ "\n</script>"

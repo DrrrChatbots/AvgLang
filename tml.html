@@ -1,12 +1,9 @@
-<head>
+<div id="avg">
     <meta http-equiv="Content-Type" content="text/html; charset=    utf-8">
-</head>
-<body>
-    <h1><center>Gary & Gary</center></h1>
     <!--insert here-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        var optsTag = '<div id="opts" style="text-align:center;background-color:#FF5733;padding:10px;margin-bottom:5px;" ></div>';
+        var optsTag = '<div id="opts" style="text-align:center;background-color:#2d4e84;padding:10px;margin-bottom:5px;" ></div>';
         var curSubs = undefined;
         var curSc = undefined;
         var curSents = [];
@@ -16,7 +13,7 @@
                 cbf = function(){};
             }
             var $new = $(tagStr);
-            $('#main').append($new);
+            $('#avgMain').append($new);
             $new.show('slow' , cbf)
             .delay(1000000)
             .queue(cbf);
@@ -33,7 +30,7 @@
             return true;
         }
         function genOpts(){
-            $(optsTag).appendTo(document.body).show('slow');
+            $(optsTag).appendTo($('#avg')).show('slow');
             $('<button '
                 + 'class="opt" opt="'
                 + curOpts[0].tag
@@ -53,8 +50,6 @@
                 if(curSubs[i].title == name){
                     curSents = curSubs[i].ctnt.sents;
                     curOpts = curSubs[i].ctnt.opts;
-                    console.log(curSents);
-                    console.log(curOpts);
                     return;
                 }
             }
@@ -68,7 +63,7 @@
                     $('#next').hide();
                     genOpts();
                 }
-                $('html,body').animate({scrollTop: $('#main').prop("scrollHeight")}, 500);
+                $('html,body').animate({scrollTop: $('#avgMain').prop("scrollHeight")}, 500);
                 return;
             }
             var e = undefined;
@@ -86,7 +81,7 @@
                     if(curSents.length == 0 && curOpts.length == 0) nextSent();
                 });
 
-            $('html,body').animate({scrollTop: $('#main').prop("scrollHeight")}, 500);
+            $('html,body').animate({scrollTop: $('#avgMain').prop("scrollHeight")}, 500);
         }
         $(document).ready(function(){
             nextSent();
@@ -96,12 +91,12 @@
             $(document).on('click', '.opt', function () {
                 changeSc(this.getAttribute("opt"));
                 $('<p><b>' + this.textContent + '</b></p>')
-                .appendTo('#main').show('slow');
+                .appendTo('#avgMain').show('slow');
                 $('#opts').remove();
                 $('#next').show();
             });
             $(document).keypress(function(e) {
-                if(e.which == 13) {
+                if(e.which == 13 || e.width == 32) {
                     if($('#next').is(":visible")){
                         $('#next').click();
                     }
@@ -109,7 +104,7 @@
             });
         });
     </script>
-    <div id="main">
+    <div id="avgMain">
     </div>
 
     <style>
@@ -124,6 +119,6 @@
         }
     </style>
 
-    <div id="next" class="noselect" style="text-align:center;background-color:#FF5733;padding:10px;margin-bottom:5px" >▽</div>
-    <!--<center><div id="next" class="noselect" style="position: fixed; width:97% ; bottom:5px ;background-color:#FF5733;padding:10px;margin-bottom:5px;" >▽</div></center>-->
-</body>
+    <div id="next" class="noselect" style="text-align:center;background-color:#2d4e84;padding:10px;margin-bottom:5px" >▽</div>
+
+</div>
