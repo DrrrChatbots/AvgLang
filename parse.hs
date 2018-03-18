@@ -91,10 +91,9 @@ parseScript raw =
 strip = f . f where f = reverse . dropWhile isSpace
 
 main = do
-  --args <- getArgs
-  raw <- readFile "script.md"
+  args <- getArgs
+  raw <- readFile (if not . null $ args then head args else "script.md")
   tml <- fmap lines $ readFile "tml.xml"
   let script = parseScript raw
       replace = (\t -> if isInfixOf insMrk t then script else t) in
     writeFile "output.html" . unlines $ map replace tml
-

@@ -4,8 +4,18 @@ Markdown liked language translated to html embedded with js.
 
 Share your game by pasting the output to your Blog !
 
-Usage:
+Usage: parse [file=script.md]
+
 ```shell
+# Makefile :
+#  compile parse.hs to executable
+
+# tml.xml  :
+#  template contained simple state machine to run script in json
+
+# parse.hs :
+#  translate script.md to json and insert it with tml.xml into output.html
+
 # write your script into script.md
 vim script.md
 # then run make in shell
@@ -65,4 +75,32 @@ AvgLang Syntax :
                | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V"
                | "W" | "X" | "Y" | "Z"
                | <en-letters><en-letters>
+```
+
+Example :
+```markdown
+# At the park
+
+Hi, how are you?@
+
+A:Just fine.
+B:Forget it!
+
+## A
+Well, unlike me...@
+
+## B
+What's wrong?@
+
+```
+```javascript
+var script = [
+   { title: 'At the park',
+     pref:
+      { sents: [ 'How are you?@' ],
+        opts:  [ { tag: 'A', sent: 'Just fine.' },
+                 { tag: 'B', sent: 'Forget it!'  } ] },
+     subs:
+      { A: { sents: ['Well, unlike me...@'], opts: [] } ,
+        B: { sents: ['What's wrong?@'], opts: [] } } } ]
 ```
