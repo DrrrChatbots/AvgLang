@@ -49,13 +49,8 @@
             }
         }
         function changeSc(name){
-            for(var i = 0 ; i < curSubs.length ; i++){
-                if(curSubs[i].title == name){
-                    curSents = curSubs[i].ctnt.sents;
-                    curOpts = curSubs[i].ctnt.opts;
-                    return;
-                }
-            }
+            curSents = curSubs[name].sents;
+            curOpts = curSubs[name].opts;
         }
         function nextSent(){
             while(curSents.length == 0){

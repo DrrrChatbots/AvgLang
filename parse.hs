@@ -8,7 +8,9 @@ import Text.Show.Unicode
 type Script   = [Scene]
 data Scene    =  Scene   {title :: String,
                           pref  :: Content,
-                          subs  :: [SubScene]}
+                          subs  :: SubScenes}
+
+newtype SubScenes = SubScenes {getSubScenes :: [SubScene]}
 
 data SubScene = SubScene {name  :: String, ctnt :: Content}
 
@@ -22,10 +24,14 @@ instance Show Scene where
       ",pref:" ++ show p ++
         ",subs:" ++ show s ++ "}"
 
+instance Show SubScenes where
+  show (SubScenes ss) = "{" ++
+    (intercalate "," $ map show ss) ++ "}"
+
 instance Show SubScene where
   show (SubScene n c) =
-    "{title:" ++ ushow n ++
-      ", ctnt:" ++ show c ++ "}"
+    ushow n ++ ":" ++ show c
+
 
 instance Show Content where
   show (Content ss os) =
@@ -65,7 +71,7 @@ parseScene (x:xs)
         tit = (drop (length sceneMrk) $ x)
         scCont = parseCont p
         scSubscs = map parseSubsc $ splitWith subscMrk s
-     in Scene tit scCont scSubscs
+     in Scene tit scCont $ SubScenes scSubscs
   | otherwise = error "parse scene without title"
 
 splitWith mrk xs = let
@@ -91,3 +97,4 @@ main = do
   let script = parseScript raw
       replace = (\t -> if isInfixOf insMrk t then script else t) in
     writeFile "output.html" . unlines $ map replace tml
+
