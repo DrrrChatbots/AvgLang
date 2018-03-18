@@ -1,6 +1,6 @@
 # AvgLang
 
-Markdown liked language compiled to html embedded with js.
+Markdown liked language translated to html embedded with js.
 
 Share your game by pasting the output to your Blog !
 
