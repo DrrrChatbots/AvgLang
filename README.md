@@ -4,7 +4,20 @@ Markdown liked language translated to html embedded with js.
 
 Share your game by pasting the output to your Blog !
 
-Syntax :
+Usage:
+```shell
+# write your script into script.md
+vim script.md
+# then run make in shell
+make
+./parse
+# -> output.html
+# You can start the game in browser directly
+google-chrome-stable output.html
+# Or paste the html to your blog
+```
+
+AvgLang Syntax :
 ```
 <script> ::= <scene> | <scene><script>
 
