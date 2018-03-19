@@ -104,3 +104,128 @@ var script = [
       { A: { sents: ['Well, unlike me...@'], opts: [] } ,
         B: { sents: ['What's wrong?@'], opts: [] } } } ]
 ```
+
+<div id="avg">
+    <meta http-equiv="Content-Type" content="text/html; charset=    utf-8">
+<script>
+var scs = [{title:"At the park",pref:{sents:["Hi, how are you?@"],opts:[{tag:"A",sent:"Just fine."},{tag:"B",sent:"Forget it!"}]},subs:{"B":{sents:["What's wrong?@"],opts:[]},"A":{sents:["Well, unlike me...@"],opts:[]}}}]
+</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var optsTag = '<div id="opts" style="text-align:center;background-color:#2d4e84;padding:10px;margin-bottom:5px;" ></div>';
+        var scTagOpen = '<div style="display: none;margin-top:10px;margin-bottom:10px;margin-left:5px;"><h2 style="margin: 0;">';
+        var scTagClos = '</h2></div>';
+
+        var curSubs = undefined;
+        var curSc = undefined;
+        var curSents = [];
+        var curOpts = [];
+        function appendMain(tagStr, cbf){
+            if(cbf == undefined){
+                cbf = function(){};
+            }
+            var $new = $(tagStr);
+            $('#avgMain').append($new);
+            $new.show('slow' , cbf)
+            .delay(1000000)
+            .queue(cbf);
+        }
+        function newSc(){
+            if(scs.length == 0){
+                $('#next').hide();
+                return false;
+            }
+            curSc = scs.pop(); appendMain(scTagOpen + curSc.title + scTagClos);
+            curSents = curSc.pref.sents;
+            curOpts = curSc.pref.opts;
+            curSubs = curSc.subs;
+            return true;
+        }
+        function genOpts(){
+            $(optsTag).appendTo($('#avg')).show('slow');
+            $('<button '
+                + 'class="opt" opt="'
+                + curOpts[0].tag
+                + '">' + curOpts[0].sent
+                + '</button>').appendTo('#opts').show('slow');
+            for(var i = 1; i < curOpts.length; i++){
+                $('<br><br><button '
+                    + 'class="opt" opt="'
+                    + curOpts[i].tag
+                    + '">' + curOpts[i].sent
+                    + '</button>').appendTo('#opts')
+                .show('slow');
+            }
+        }
+        function changeSc(name){
+            curSents = curSubs[name].sents;
+            curOpts = curSubs[name].opts;
+        }
+        function nextSent(){
+            while(curSents.length == 0){
+                if(curOpts.length == 0){
+                    newSc();
+                }
+                else{
+                    $('#next').hide();
+                    genOpts();
+                }
+                $('html,body').animate({scrollTop: $('#avgMain').prop("scrollHeight")}, 500);
+                return;
+            }
+            var e = undefined;
+            var acc = '<div style="display: none;margin-top:10px;margin-bottom:10px;margin-left:20px;">';
+                while(curSents.length != 0){
+                    e = curSents.pop();
+                    if(e.slice(-1) == '@') break;
+                    acc += '<p style="margin: 0;">' + e + '</p>';
+                    e = undefined;
+                }
+                if(e != undefined){
+                    acc += '<p style="margin: 0;">' + e.substring(0, e.length - 1) + '</p>';
+                }
+                appendMain(acc + '</div>', function(){
+                    if(curSents.length == 0 && curOpts.length == 0) nextSent();
+                });
+
+            $('html,body').animate({scrollTop: $('#avgMain').prop("scrollHeight")}, 500);
+        }
+        $(document).ready(function(){
+            nextSent();
+            $('#next').click(function(){
+                nextSent();
+            });
+            $(document).on('click', '.opt', function () {
+                changeSc(this.getAttribute("opt"));
+                $('<p><b>' + this.textContent + '</b></p>')
+                .appendTo('#avgMain').show('slow');
+                $('#opts').remove();
+                $('#next').show();
+            });
+            $(document).keypress(function(e) {
+                if(e.which == 13 || e.width == 32) {
+                    if($('#next').is(":visible")){
+                        $('#next').click();
+                    }
+                }
+            });
+        });
+    </script>
+    <div id="avgMain">
+    </div>
+
+    <style>
+        .noselect {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+            supported by Chrome and Opera */
+        }
+    </style>
+
+    <div id="next" class="noselect" style="text-align:center;background-color:#2d4e84;padding:10px;margin-bottom:5px" >▽</div>
+
+</div>

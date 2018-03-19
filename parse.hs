@@ -97,3 +97,4 @@ main = do
   let script = parseScript raw
       replace = (\t -> if isInfixOf insMrk t then script else t) in
     writeFile "output.html" . unlines $ map replace tml
+
