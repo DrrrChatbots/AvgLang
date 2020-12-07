@@ -1,5 +1,12 @@
 # AvgLang
 
+---
+
+The newer version is under rewriting by [pureScript](https://github.com/purescript/documentation/blob/master/language/README.md),
+I will use the [parsing](https://github.com/purescript-contrib/purescript-parsing) library to re-design the language, and it would be ported to [drrr chatbot extension](https://chrome.google.com/webstore/detail/drrr-chatbot-extension/fkmpnkcjocenkliehpdhlfbmdmdnokgm) to support some TRPG game.
+
+---
+
 Markdown liked language translated to html embedded with js.
 
 Share your game by pasting the output to your Blog !
