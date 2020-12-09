@@ -1,8 +1,8 @@
-# AvgLang
+# AvgLang (Archived)
 
 ---
 
-The newer version is under rewriting by [pureScript](https://github.com/purescript/documentation/blob/master/language/README.md),
+The newer version is under rewriting by [pureScript](https://github.com/purescript/documentation/blob/master/language/README.md) named [BotScript](https://github.com/DrrrChatbots/BotScript),
 I will use the [parsing](https://github.com/purescript-contrib/purescript-parsing) library to re-design the language, and it would be ported to [drrr chatbot extension](https://chrome.google.com/webstore/detail/drrr-chatbot-extension/fkmpnkcjocenkliehpdhlfbmdmdnokgm) to support some TRPG game.
 
 ---
